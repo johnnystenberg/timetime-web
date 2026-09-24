@@ -78,6 +78,7 @@ T = {
   "pv.rights.p": "Both a copy of your data and deletion are available directly in the app, under <strong>Your account</strong> (the button with your initials).",
   "pv.rights.p2": "<strong>Download my data</strong> gives you a JSON file with your account, your memberships and all time you reported yourself. Other people's time is never included, not even in open groups — it is their data, not yours. The file needs no subscription and also works in archived groups.",
   "pv.rights.p3": '<strong>Delete my account</strong> removes your time and your memberships. Groups you own pass to a remaining member, or are deleted if you are alone. If you need help with either, email <a href="mailto:support@timetime.work">support@timetime.work</a>.',
+  "pv.rights.p4": 'To delete part of your data without deleting your account: you can delete any of your own time entries in the app, except on days in a period the group owner has locked. For anything else — a period, your notes — email <a href="mailto:support@timetime.work">support@timetime.work</a> and we will delete it.',
   "pv.contact.h": "Contact",
   # Support
   "sp.intro": 'Email <a href="mailto:support@timetime.work">support@timetime.work</a> and we will reply as soon as we can.',
@@ -146,6 +147,7 @@ T = {
   "pv.rights.p": "Både utdrag och radering sker direkt i appen, under <strong>Ditt konto</strong> (knappen med dina initialer).",
   "pv.rights.p2": "<strong>Ladda ner mina data</strong> ger dig en JSON-fil med ditt konto, dina medlemskap och all tid du själv rapporterat. Andras tid ingår aldrig, inte ens i öppna grupper — den är deras uppgifter, inte dina. Filen kräver ingen prenumeration och fungerar även i arkiverade grupper.",
   "pv.rights.p3": '<strong>Radera mitt konto</strong> tar bort din tid och dina medlemskap. Grupper du äger går över till en kvarvarande medlem, eller raderas om du är ensam. Behöver du hjälp med något av det, mejla <a href="mailto:support@timetime.work">support@timetime.work</a>.',
+  "pv.rights.p4": 'Vill du radera en del av din data utan att radera kontot kan du radera dina egna tidsposter i appen, utom på dagar i en period som gruppens ägare har låst. För annat — en viss period, dina anteckningar — mejla <a href="mailto:support@timetime.work">support@timetime.work</a>, så raderar vi det.',
   "pv.contact.h": "Kontakt",
   "sp.intro": 'Mejla <a href="mailto:support@timetime.work">support@timetime.work</a> så svarar vi så snart vi kan.',
   "sp.full.h": "Jag kom inte in i gruppen",
@@ -213,6 +215,7 @@ T = {
   "pv.rights.p": "Auskunft und Löschung erledigst du direkt in der App, unter <strong>Dein Konto</strong> (die Schaltfläche mit deinen Initialen).",
   "pv.rights.p2": "<strong>Meine Daten herunterladen</strong> liefert eine JSON-Datei mit deinem Konto, deinen Mitgliedschaften und aller Zeit, die du selbst erfasst hast. Die Zeit anderer ist nie enthalten, auch nicht in offenen Gruppen — das sind ihre Daten, nicht deine. Die Datei braucht kein Abo und funktioniert auch in archivierten Gruppen.",
   "pv.rights.p3": '<strong>Mein Konto löschen</strong> entfernt deine Zeit und deine Mitgliedschaften. Gruppen, deren Inhaber du bist, gehen an ein verbleibendes Mitglied über oder werden gelöscht, wenn du allein bist. Brauchst du dabei Hilfe, schreib an <a href="mailto:support@timetime.work">support@timetime.work</a>.',
+  "pv.rights.p4": 'Um einen Teil deiner Daten zu löschen, ohne dein Konto zu löschen, kannst du deine eigenen Zeiteinträge in der App löschen – außer an Tagen in einem Zeitraum, den der Gruppeninhaber gesperrt hat. Für alles andere – einen Zeitraum, deine Notizen – schreib an <a href="mailto:support@timetime.work">support@timetime.work</a>, und wir löschen es.',
   "pv.contact.h": "Kontakt",
   "sp.intro": 'Schreib an <a href="mailto:support@timetime.work">support@timetime.work</a>, wir antworten so schnell wie möglich.',
   "sp.full.h": "Ich komme nicht in die Gruppe",
@@ -432,7 +435,7 @@ def privacy(lang: str) -> str:
 <h2>{t['pv.sees.h']}</h2><p>{s('pv.sees.p')}</p>
 <h2>{t['pv.not.h']}</h2><p>{s('pv.not.p')}</p>
 <h2>{t['pv.sub.h']}</h2><p>{s('pv.sub.p')}</p>
-<h2 id="delete">{t['pv.rights.h']}</h2><p>{s('pv.rights.p')}</p><p>{s('pv.rights.p2')}</p><p>{s('pv.rights.p3')}</p>
+<h2 id="delete">{t['pv.rights.h']}</h2><p>{s('pv.rights.p')}</p><p>{s('pv.rights.p2')}</p><p>{s('pv.rights.p3')}</p><p>{s('pv.rights.p4')}</p>
 <h2>{t['pv.contact.h']}</h2><p>JMS Software · <a href="mailto:support@timetime.work">support@timetime.work</a></p>"""
     return doc(lang, "privacy", t["pv.title"], body)
 
