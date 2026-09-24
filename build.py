@@ -36,6 +36,9 @@ T = {
   "hero.t1": "Free for up to 3 people", "hero.t2": "Works offline", "hero.t3": "Nobody sees your time unless you want",
   "badge.soon": "Coming soon to the",
   "stage.title": "Thursday 6 August", "stage.of": "of 8h · 2h 45m left",
+  "s.title": "The whole app is four tabs",
+  "s.lead": "Report the day, see the week, follow the time — and invite the team.",
+  "s.day": "Day", "s.week": "Week", "s.stats": "Statistics", "s.group": "Group",
   "f.title": "Built for low friction",
   "f.lead": "Time tracking is something you have to do, not something you want to do. Every decision in the app shortens the path from impulse to saved entry.",
   "f1.h": "Three taps", "f1.p": "Open, pick an activity, save. Fill in afterwards or start a timer — both are first-class paths, neither an afterthought.",
@@ -102,6 +105,9 @@ T = {
   "hero.t1": "Gratis upp till 3 personer", "hero.t2": "Fungerar utan täckning", "hero.t3": "Ingen ser din tid om ni inte vill",
   "badge.soon": "Kommer snart till",
   "stage.title": "Torsdag 6 augusti", "stage.of": "av 8h · 2h 45m kvar",
+  "s.title": "Hela appen är fyra flikar",
+  "s.lead": "Rapportera dagen, se veckan, följ tiden — och bjud in teamet.",
+  "s.day": "Dag", "s.week": "Vecka", "s.stats": "Statistik", "s.group": "Grupp",
   "f.title": "Byggd för låg friktion",
   "f.lead": "Tidrapportering är något man måste göra, inte vill. Därför är varje beslut i appen taget för att korta vägen från impuls till sparad post.",
   "f1.h": "Tre tapp", "f1.p": "Öppna, välj aktivitet, spara. Fyll i efterhand eller starta en timer — båda är förstklassiga vägar, inte den ena en eftertanke.",
@@ -166,6 +172,9 @@ T = {
   "hero.t1": "Kostenlos für bis zu 3 Personen", "hero.t2": "Funktioniert offline", "hero.t3": "Niemand sieht deine Zeit, wenn ihr es nicht wollt",
   "badge.soon": "Bald verfügbar im",
   "stage.title": "Donnerstag, 6. August", "stage.of": "von 8h · noch 2h 45m",
+  "s.title": "Die ganze App in vier Tabs",
+  "s.lead": "Den Tag erfassen, die Woche sehen, die Zeit verfolgen — und das Team einladen.",
+  "s.day": "Tag", "s.week": "Woche", "s.stats": "Statistik", "s.group": "Gruppe",
   "f.title": "Gebaut für wenig Aufwand",
   "f.lead": "Zeiterfassung muss man machen, nicht wollen. Deshalb verkürzt jede Entscheidung in der App den Weg vom Gedanken zum gespeicherten Eintrag.",
   "f1.h": "Drei Tipps", "f1.p": "Öffnen, Tätigkeit wählen, speichern. Nachträglich eintragen oder einen Timer starten — beides sind vollwertige Wege, keiner ist ein Nachgedanke.",
@@ -328,6 +337,14 @@ def index(lang: str) -> str:
         f'<div class="price-card{" hi" if k == "pr1" else ""}"><h3>{t[k + ".h"]}</h3>{price(k)}<p>{t[k + ".p"]}</p></div>'
         for k in ["pr0", "pr1", "pr2", "pr3"]
     )
+    # Riktiga skärmdumpar, på sidans eget språk (samma bilder som i butikerna,
+    # nedskalade till WebP i assets/screens/<språk>/).
+    shot_dir = {"en": "en", "sv": "sv", "de": "de"}[lang]
+    shots = "".join(
+        f'<figure><img src="/assets/screens/{shot_dir}/{k}.webp" width="600" height="1304" '
+        f'loading="lazy" alt="{t["s." + k]}"><figcaption>{t["s." + k]}</figcaption></figure>'
+        for k in ["day", "week", "stats", "group"]
+    )
     badges = STORE_BADGE.format(name="App Store", icon=APPLE_ICON, soon=t["badge.soon"]) + \
         STORE_BADGE.format(name="Google Play", icon=PLAY_ICON, soon=t["badge.soon"])
     return head(lang, "index", t["title"], t["meta"]) + f"""<meta property="og:title" content="{t['title']}">
@@ -360,6 +377,10 @@ def index(lang: str) -> str:
     </div>
   </section>
 </div>
+<section><div class="wrap">
+  <h2>{t['s.title']}</h2><p class="lead">{t['s.lead']}</p>
+  <div class="screens">{shots}</div>
+</div></section>
 <section><div class="wrap">
   <h2>{t['f.title']}</h2><p class="lead">{t['f.lead']}</p>
   <div class="grid">{cards}</div>

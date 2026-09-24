@@ -73,3 +73,15 @@ body.doc h2 { font-size: 1.05rem; margin-top: 2rem; letter-spacing: 0; }
 body.doc p { color: var(--sec); margin-top: .7rem; line-height: 1.6; }
 body.doc .muted { color: var(--ter); font-size: .88rem; }
 body.doc footer { margin-top: 3rem; }
+
+/* Skärmdumparna: fyra i rad, och på smala skärmar en rad man sveper i. */
+.screens { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; margin-top: 2rem; }
+.screens figure { margin: 0; }
+.screens img { width: 100%; height: auto; display: block; border-radius: 26px; background: var(--sunken);
+  box-shadow: 0 1px 2px rgba(20,18,15,.06), 0 12px 32px rgba(20,18,15,.10); }
+.screens figcaption { text-align: center; color: var(--sec); font-size: .9rem; margin-top: .8rem; }
+@media (max-width: 800px) {
+  .screens { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%;
+    overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: .6rem; }
+  .screens figure { scroll-snap-align: start; }
+}
