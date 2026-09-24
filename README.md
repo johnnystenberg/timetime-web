@@ -6,10 +6,25 @@ colleagues with a single link.
 
 Static site served via GitHub Pages.
 
-- `index.html` — landing page (SV/EN)
-- `privacy.html` — privacy policy (App Store / Play requirement)
-- `support.html` — support / FAQ (App Store / Play requirement)
-- `assets/` — app icon
+Three languages, each a complete static page (no text is swapped by
+JavaScript):
+
+- `/` — English, the fallback (same rule as the apps)
+- `/sv/` — Swedish
+- `/de/` — German
+
+Each has `index.html`, `privacy.html` (App Store / Play requirement) and
+`support.html`. The root sends visitors whose browser is Swedish or German to
+their language, unless they picked one; without JavaScript the language links
+are there instead.
+
+**Don't edit the HTML.** All text lives in `build.py`, per language and key;
+edit there and run `python3 build.py`. A key missing in one language stops
+the build — that is how the three stay in step. Shared styles are in
+`assets/site.css`.
+
+Prices in SEK appear only on the Swedish page: amounts in other currencies are
+not decided yet, and the English and German pages point to the stores.
 
 The join landing and app services live separately at
 [app.timetime.work](https://app.timetime.work) (Next.js on Vercel) — a static

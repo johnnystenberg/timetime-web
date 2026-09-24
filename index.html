@@ -1,127 +1,57 @@
 <!doctype html>
-<html lang="sv">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TimeTime — tidrapportering för team</title>
-<meta name="description" content="Rapportera tid på tre tapp, mot gruppens gemensamma aktiviteter. En länk bjuder in kollegorna. iPhone och Android.">
-<meta property="og:title" content="TimeTime — tidrapportering för team">
-<meta property="og:description" content="Tre tapp för att fylla i en dag. En länk för att bjuda in kollegorna.">
+<title>TimeTime — time tracking for teams</title>
+<meta name="description" content="Report time in three taps, against your group's shared activities. One link invites your colleagues. iPhone and Android.">
+<link rel="alternate" hreflang="en" href="https://timetime.work/">
+<link rel="alternate" hreflang="sv" href="https://timetime.work/sv/">
+<link rel="alternate" hreflang="de" href="https://timetime.work/de/">
+<link rel="alternate" hreflang="x-default" href="https://timetime.work/">
+<link rel="icon" href="/assets/icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+<meta property="og:title" content="TimeTime — time tracking for teams">
+<meta property="og:description" content="Three taps to fill in a day. One link to invite your colleagues.">
 <meta property="og:image" content="https://timetime.work/assets/icon.png">
 <meta property="og:type" content="website">
-<link rel="icon" href="assets/icon.png">
-<style>
-  :root {
-    --ink: #14171A; --paper: #FFFDF9; --sunken: #F6F2EA;
-    --sunken-alt: #F1EDE4; --accent: #B03A22; --accent-ink: #F9F4EE;
-    --sec: #5A6066; --ter: #8A8F94; --border: #DED8CD;
-    --teal: #4E7C7F; --amber: #C9A94A; --violet: #7A6A9C;
-    --body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --mono: ui-monospace, "IBM Plex Mono", SFMono-Regular, Menlo, monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
-
-  header.site { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; }
-  .brand { display: flex; align-items: center; gap: .6rem; font-family: var(--mono); font-size: .95rem; color: var(--ter); text-decoration: none; }
-  .brand img { width: 30px; height: 30px; border-radius: 8px; }
-  .lang-btn { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 12px; border: 1px solid var(--border); border-radius: 100px; background: transparent; font-family: var(--body); font-weight: 600; font-size: 13px; color: var(--ink); cursor: pointer; }
-  .lang-btn:hover { background: var(--sunken); }
-
-  .hero { padding: 3rem 0 4rem; display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: center; }
-  @media (max-width: 800px) { .hero { grid-template-columns: 1fr; gap: 2.5rem; } }
-  .eyebrow { font-family: var(--mono); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ter); }
-  h1 { font-size: clamp(2.1rem, 5.5vw, 3.4rem); font-weight: 600; letter-spacing: -.025em; margin-top: 1rem; line-height: 1.1; }
-  h1 .em { color: var(--accent); }
-  .sub { font-size: 1.12rem; color: var(--sec); margin-top: 1.1rem; max-width: 32rem; }
-  .cta { display: flex; gap: .7rem; flex-wrap: wrap; margin-top: 1.9rem; }
-  .store svg { height: 50px; width: auto; display: block; }
-  .store.soon { opacity: .55; cursor: default; }
-  .trust { display: flex; gap: 1.4rem; flex-wrap: wrap; margin-top: 1.6rem; color: var(--ter); font-size: .88rem; }
-
-  .stage { background: var(--sunken); border-radius: 20px; padding: 1.6rem; }
-  .rowline { display: flex; align-items: center; gap: .7rem; background: var(--paper); border-radius: 12px; padding: .8rem .9rem; margin-bottom: .55rem; }
-  .tab { width: 6px; height: 30px; border-radius: 3px; }
-  .rowline .name { font-weight: 500; font-size: .95rem; }
-  .rowline .val { margin-left: auto; font-weight: 500; font-size: .95rem; }
-  .daytotal { display: flex; align-items: baseline; gap: .5rem; margin-bottom: 1rem; }
-  .daytotal .big { font-size: 1.6rem; font-weight: 600; color: var(--accent); }
-  .daytotal .of { color: var(--ter); font-size: .9rem; }
-  .bar { height: 6px; border-radius: 3px; background: var(--sunken-alt); overflow: hidden; margin-bottom: 1.2rem; }
-  .bar i { display: block; height: 100%; width: 66%; background: var(--accent); }
-
-  section { padding: 3.4rem 0; border-top: 1px solid var(--border); }
-  h2 { font-size: 1.7rem; font-weight: 600; letter-spacing: -.015em; }
-  section > .wrap > p.lead { color: var(--sec); margin-top: .8rem; max-width: 40rem; }
-  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: 1.9rem; }
-  .card { background: var(--sunken); border-radius: 16px; padding: 1.4rem; }
-  .card h3 { font-size: 1.02rem; font-weight: 600; }
-  .card p { color: var(--sec); font-size: .94rem; margin-top: .45rem; }
-  .card .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-bottom: .8rem; }
-
-  .price-card { background: var(--sunken); border-radius: 16px; padding: 1.4rem; }
-  .price-card.hi { background: var(--ink); color: var(--paper); }
-  .price-card.hi p { color: #C9CDD1; }
-  .amount { font-size: 1.7rem; font-weight: 600; letter-spacing: -.02em; }
-  .unit { color: var(--ter); font-size: .88rem; }
-  .price-card.hi .unit { color: #A7B0B5; }
-
-  footer { padding: 2.6rem 0 4rem; border-top: 1px solid var(--border); color: var(--ter); font-size: .9rem; }
-  footer a { color: var(--sec); }
-  a { color: var(--accent); }
-  .note { color: var(--ter); font-size: .88rem; margin-top: 1.2rem; }
-</style>
 </head>
 <body>
-
 <div class="wrap">
   <header class="site">
-    <a class="brand" href="/"><img src="assets/icon.png" alt="">timetime</a>
-    <button class="lang-btn" id="langBtn" aria-label="Byt språk">
-      <span data-i18n="nav.lang">Svenska</span> ⌄
-    </button>
+    <a class="brand" href="/"><img src="/assets/icon.png" alt="">timetime</a>
+    <nav class="langs" aria-label="Language"><a href="/" hreflang="en" lang="en" aria-current="page">English</a> · <a href="/sv/" hreflang="sv" lang="sv">Svenska</a> · <a href="/de/" hreflang="de" lang="de">Deutsch</a></nav>
   </header>
-
   <section class="hero" style="border:0">
     <div>
-      <p class="eyebrow" data-i18n="hero.eyebrow">Tidrapportering för team · iPhone &amp; Android</p>
-      <h1 data-i18n-html="hero.h1">Tid som teamet <span class="em">faktiskt</span> rapporterar</h1>
-      <p class="sub" data-i18n="hero.sub">Tre tapp för att fylla i en dag. En länk för att bjuda in kollegorna. Ingen administration, inga konton att dela ut.</p>
-      <div class="cta">
-        <span class="store soon" title="Coming soon">
-            <svg viewBox="0 0 180 54" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <rect width="180" height="54" rx="12" fill="#161616"/>
-              <g fill="#fff">
-                <path d="M37 26.9c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.5 1-4.4 1-.9 0-2.3-1-3.8-1-1.9 0-3.7 1.1-4.7 2.9-2 3.5-.5 8.7 1.4 11.5.9 1.4 2 2.9 3.5 2.9 1.4-.1 1.9-.9 3.6-.9s2.2.9 3.7.9c1.5 0 2.5-1.4 3.4-2.8 1.1-1.6 1.5-3.1 1.6-3.2-.1 0-3-1.2-3-4.4zM34.2 18.2c.8-1 1.3-2.3 1.2-3.7-1.1 0-2.5.8-3.3 1.7-.7.8-1.4 2.2-1.2 3.5 1.3.1 2.5-.6 3.3-1.5z"/>
-                <text x="54" y="24" font-family="Helvetica,Arial,sans-serif" font-size="9" fill="#a1a1a1" data-i18n="badge.soon">Kommer snart till</text>
-                <text x="54" y="41" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#fff">App Store</text>
-              </g>
-            </svg>
-          </span>
-        <span class="store soon" title="Coming soon">
-            <svg viewBox="0 0 180 54" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <rect width="180" height="54" rx="12" fill="#161616"/>
-              <g fill="#fff">
-                <path d="M24 15.6c-.5.5-.8 1.3-.8 2.3v18.2c0 1 .3 1.8.8 2.3l.1.1 10.2-10.2v-2.4L24.1 15.5l-.1.1zm13.7 13.1-3.4-3.4 3.4-3.4 4.1 2.3c1.2.7 1.2 1.8 0 2.5l-4.1 2.3v-.3zm-1.1.6L33.1 26l-7.9 7.9c.4.4 1 .5 1.8.1l9.6-5.4v.7zm0-8.6-9.6-5.4c-.8-.4-1.4-.3-1.8.1l7.9 7.9 3.5-3.5v.9z"/>
-                <text x="54" y="24" font-family="Helvetica,Arial,sans-serif" font-size="9" fill="#a1a1a1" data-i18n="badge.soon">Kommer snart till</text>
-                <text x="54" y="41" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#fff">Google Play</text>
-              </g>
-            </svg>
-          </span>
-      </div>
-      <div class="trust">
-        <span data-i18n="hero.t1">Gratis upp till 3 personer</span>
-        <span data-i18n="hero.t2">Fungerar utan täckning</span>
-        <span data-i18n="hero.t3">Ingen ser din tid om ni inte vill</span>
-      </div>
+      <p class="eyebrow">Time tracking for teams · iPhone &amp; Android</p>
+      <h1>Time your team <span class="em">actually</span> reports</h1>
+      <p class="sub">Three taps to fill in a day. One link to invite your colleagues. No admin, no accounts to hand out.</p>
+      <div class="cta"><span class="store soon">
+  <svg viewBox="0 0 180 54" role="img" aria-label="App Store" xmlns="http://www.w3.org/2000/svg">
+    <rect width="180" height="54" rx="12" fill="#161616"/>
+    <g fill="#fff">
+      <path d="M37 26.9c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.5 1-4.4 1-.9 0-2.3-1-3.8-1-1.9 0-3.7 1.1-4.7 2.9-2 3.5-.5 8.7 1.4 11.5.9 1.4 2 2.9 3.5 2.9 1.4-.1 1.9-.9 3.6-.9s2.2.9 3.7.9c1.5 0 2.5-1.4 3.4-2.8 1.1-1.6 1.5-3.1 1.6-3.2-.1 0-3-1.2-3-4.4zM34.2 18.2c.8-1 1.3-2.3 1.2-3.7-1.1 0-2.5.8-3.3 1.7-.7.8-1.4 2.2-1.2 3.5 1.3.1 2.5-.6 3.3-1.5z"/>
+      <text x="54" y="24" font-family="Helvetica,Arial,sans-serif" font-size="9" fill="#a1a1a1">Coming soon to the</text>
+      <text x="54" y="41" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#fff">App Store</text>
+    </g>
+  </svg>
+</span><span class="store soon">
+  <svg viewBox="0 0 180 54" role="img" aria-label="Google Play" xmlns="http://www.w3.org/2000/svg">
+    <rect width="180" height="54" rx="12" fill="#161616"/>
+    <g fill="#fff">
+      <path d="M24 15.6c-.5.5-.8 1.3-.8 2.3v18.2c0 1 .3 1.8.8 2.3l.1.1 10.2-10.2v-2.4L24.1 15.5l-.1.1zm13.7 13.1-3.4-3.4 3.4-3.4 4.1 2.3c1.2.7 1.2 1.8 0 2.5l-4.1 2.3v-.3zm-1.1.6L33.1 26l-7.9 7.9c.4.4 1 .5 1.8.1l9.6-5.4v.7zm0-8.6-9.6-5.4c-.8-.4-1.4-.3-1.8.1l7.9 7.9 3.5-3.5v.9z"/>
+      <text x="54" y="24" font-family="Helvetica,Arial,sans-serif" font-size="9" fill="#a1a1a1">Coming soon to the</text>
+      <text x="54" y="41" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#fff">Google Play</text>
+    </g>
+  </svg>
+</span></div>
+      <div class="trust"><span>Free for up to 3 people</span><span>Works offline</span><span>Nobody sees your time unless you want</span></div>
     </div>
-
     <div class="stage" aria-hidden="true">
-      <div style="font-family:var(--mono);font-size:.75rem;color:var(--ter)">Nordvind AB</div>
-      <div style="font-weight:600;font-size:1.05rem;margin-top:.2rem" data-i18n="stage.title">Torsdag 6 augusti</div>
-      <div class="daytotal"><span class="big">5h 15m</span><span class="of" data-i18n="stage.of">av 8h · 2h 45m kvar</span></div>
+      <div class="stage-group">Nordvind AB</div>
+      <div class="stage-title">Thursday 6 August</div>
+      <div class="daytotal"><span class="big">5h 15m</span><span class="of">of 8h · 2h 45m left</span></div>
       <div class="bar"><i></i></div>
       <div class="rowline"><span class="tab" style="background:#B03A22"></span><span class="name">R&amp;D</span><span class="val">2h 30m</span></div>
       <div class="rowline"><span class="tab" style="background:#4E7C7F"></span><span class="name">Projekt Alva</span><span class="val">1h 45m</span></div>
@@ -129,79 +59,43 @@
     </div>
   </section>
 </div>
-
-<section>
-  <div class="wrap">
-    <h2 data-i18n="f.title">Byggd för låg friktion</h2>
-    <p class="lead" data-i18n="f.lead">Tidrapportering är något man måste göra, inte vill. Därför är varje beslut i appen taget för att korta vägen från impuls till sparad post.</p>
-    <div class="grid">
-      <div class="card"><span class="dot" style="background:#B03A22"></span><h3 data-i18n="f1.h">Tre tapp</h3><p data-i18n="f1.p">Öppna, välj aktivitet, spara. Fyll i efterhand eller starta en timer — båda är förstklassiga vägar, inte den ena en eftertanke.</p></div>
-      <div class="card"><span class="dot" style="background:#4E7C7F"></span><h3 data-i18n="f2.h">En länk bjuder in</h3><p data-i18n="f2.p">Dela länken, kollegan är med direkt. Inget godkännande, inga inbjudningskoder att mejla runt.</p></div>
-      <div class="card"><span class="dot" style="background:#7A6A9C"></span><h3 data-i18n="f3.h">Fungerar utan nät</h3><p data-i18n="f3.p">Poster köas lokalt och synkas när täckningen kommer tillbaka. Ingen tid går förlorad på tåget eller i källaren.</p></div>
-      <div class="card"><span class="dot" style="background:#C9A94A"></span><h3 data-i18n="f4.h">Widget och timer</h3><p data-i18n="f4.p">Lägg 30 eller 60 minuter direkt från hemskärmen. Pågående timer syns på låsskärmen och i Dynamic Island.</p></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2 data-i18n="p.title">Integritet som är inbyggd, inte lovad</h2>
-    <p class="lead" data-i18n="p.lead">Gruppen väljer själv hur mycket som delas — och reglerna hålls av databasen, inte av gränssnittet.</p>
-    <div class="grid">
-      <div class="card"><h3 data-i18n="p1.h">Öppen</h3><p data-i18n="p1.p">Alla medlemmar ser allas poster och namn. Bra för små team som ändå sitter tillsammans.</p></div>
-      <div class="card"><h3 data-i18n="p2.h">Summerad</h3><p data-i18n="p2.p">Totaler per aktivitet, utan avsändare. Ni ser vart tiden går — men ingen ser vem som gjort vad.</p></div>
-      <div class="card"><h3 data-i18n="p3.h">Privat</h3><p data-i18n="p3.p">Var och en ser bara sitt eget. Ägaren kan exportera aggregat för uppföljning.</p></div>
-    </div>
-    <p class="note" data-i18n="p.note">Ingen kan ändra någon annans tid — inte heller ägaren. Det är en medveten regel, inte en lucka.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2 data-i18n="pr.title">Pris</h2>
-    <p class="lead" data-i18n="pr.lead">Ägaren betalar för hela gruppen. Ingen medlem möter någonsin en betalvägg.</p>
-    <div class="grid">
-      <div class="price-card"><h3 data-i18n="pr0.h">Gratis</h3><div class="amount">0 kr</div><p data-i18n="pr0.p">Upp till 3 personer. Ingen tidsgräns.</p></div>
-      <div class="price-card hi"><h3 data-i18n="pr1.h">Team</h3><div class="amount">149 kr<span class="unit">/mån</span></div><p data-i18n="pr1.p">Upp till 10 personer.</p></div>
-      <div class="price-card"><h3 data-i18n="pr2.h">Större team</h3><div class="amount">299 kr<span class="unit">/mån</span></div><p data-i18n="pr2.p">Upp till 25 personer.</p></div>
-      <div class="price-card"><h3 data-i18n="pr3.h">Obegränsat</h3><div class="amount">499 kr<span class="unit">/mån</span></div><p data-i18n="pr3.p">Hur många som helst.</p></div>
-    </div>
-    <p class="note" data-i18n="pr.note">Full historik och CSV-export ingår i alla nivåer. 14 dagars provperiod utan medlemstak — och slutar ni betala raderas ingenting: gruppen pausas, och allt kommer tillbaka vid uppgradering.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p>
-      <a href="privacy.html" data-i18n="foot.privacy">Integritetspolicy</a> ·
-      <a href="support.html" data-i18n="foot.support">Support</a> ·
-      <a href="mailto:support@timetime.work">support@timetime.work</a>
-    </p>
-    <p style="margin-top:.6rem">© 2026 JMS Software</p>
-  </div>
-</footer>
-
+<section><div class="wrap">
+  <h2>Built for low friction</h2><p class="lead">Time tracking is something you have to do, not something you want to do. Every decision in the app shortens the path from impulse to saved entry.</p>
+  <div class="grid"><div class="card"><span class="dot" style="background:#B03A22"></span><h3>Three taps</h3><p>Open, pick an activity, save. Fill in afterwards or start a timer — both are first-class paths, neither an afterthought.</p></div><div class="card"><span class="dot" style="background:#4E7C7F"></span><h3>One link invites</h3><p>Share the link and your colleague is in. No approval, no invite codes to email around.</p></div><div class="card"><span class="dot" style="background:#7A6A9C"></span><h3>Works offline</h3><p>Entries queue locally and sync when you are back online. No time lost on the train or in the basement.</p></div><div class="card"><span class="dot" style="background:#C9A94A"></span><h3>Widget and timer</h3><p>Add 30 or 60 minutes straight from the home screen. A running timer shows on the lock screen and in the Dynamic Island.</p></div><div class="card"><span class="dot" style="background:#5A6066"></span><h3>Your country's calendar</h3><p>Public holidays for your country — and for German states and the UK's nations — so a day off never shows up as missing time.</p></div></div>
+</div></section>
+<section><div class="wrap">
+  <h2>Privacy that is built in, not promised</h2><p class="lead">The group decides how much is shared — and the rules are enforced by the database, not by the interface.</p>
+  <div class="grid"><div class="card"><h3>Open</h3><p>Every member sees everyone's entries and names. Good for small teams who sit together anyway.</p></div><div class="card"><h3>Summarised</h3><p>Totals per activity, without names. You see where the time goes — but nobody sees who did what.</p></div><div class="card"><h3>Private</h3><p>Everyone only sees their own. The owner can export aggregates for follow-up.</p></div></div>
+  <p class="note">Nobody can edit anyone else's time — not even the owner. That is a deliberate rule, not a gap.</p>
+</div></section>
+<section><div class="wrap">
+  <h2>Pricing</h2><p class="lead">The owner pays for the whole group. No member ever meets a paywall.</p>
+  <div class="grid"><div class="price-card"><h3>Free</h3><p>Up to 3 people. No time limit.</p></div><div class="price-card hi"><h3>Team</h3><p>Up to 10 people.</p></div><div class="price-card"><h3>Larger team</h3><p>Up to 25 people.</p></div><div class="price-card"><h3>Unlimited</h3><p>As many as you like.</p></div></div>
+  <p class="note">Monthly, in your local currency — shown in the App Store and Google Play.</p>
+  <p class="note">Full history and CSV export are included in every tier. A 14-day trial with no seat cap — and if you stop paying nothing is deleted: the group pauses, and everything returns on upgrade.</p>
+</div></section>
+<footer><div class="wrap">
+  <p><a href="/privacy.html">Privacy policy</a> ·
+     <a href="/support.html">Support</a> ·
+     <a href="mailto:support@timetime.work">support@timetime.work</a></p>
+  <p class="langline"><nav class="langs" aria-label="Language"><a href="/" hreflang="en" lang="en" aria-current="page">English</a> · <a href="/sv/" hreflang="sv" lang="sv">Svenska</a> · <a href="/de/" hreflang="de" lang="de">Deutsch</a></nav></p>
+  <p>© 2026 JMS Software</p>
+</div></footer>
 <script>
-const I18N = {"sv": {"nav.lang": "Svenska", "hero.eyebrow": "Tidrapportering för team · iPhone & Android", "hero.h1": "Tid som teamet <span class=\"em\">faktiskt</span> rapporterar", "hero.sub": "Tre tapp för att fylla i en dag. En länk för att bjuda in kollegorna. Ingen administration, inga konton att dela ut.", "hero.t1": "Gratis upp till 3 personer", "hero.t2": "Fungerar utan täckning", "hero.t3": "Ingen ser din tid om ni inte vill", "badge.soon": "Kommer snart till", "stage.title": "Torsdag 6 augusti", "stage.of": "av 8h · 2h 45m kvar", "f.title": "Byggd för låg friktion", "f.lead": "Tidrapportering är något man måste göra, inte vill. Därför är varje beslut i appen taget för att korta vägen från impuls till sparad post.", "f1.h": "Tre tapp", "f1.p": "Öppna, välj aktivitet, spara. Fyll i efterhand eller starta en timer — båda är förstklassiga vägar, inte den ena en eftertanke.", "f2.h": "En länk bjuder in", "f2.p": "Dela länken, kollegan är med direkt. Inget godkännande, inga inbjudningskoder att mejla runt.", "f3.h": "Fungerar utan nät", "f3.p": "Poster köas lokalt och synkas när täckningen kommer tillbaka. Ingen tid går förlorad på tåget eller i källaren.", "f4.h": "Widget och timer", "f4.p": "Lägg 30 eller 60 minuter direkt från hemskärmen. Pågående timer syns på låsskärmen och i Dynamic Island.", "p.title": "Integritet som är inbyggd, inte lovad", "p.lead": "Gruppen väljer själv hur mycket som delas — och reglerna hålls av databasen, inte av gränssnittet.", "p1.h": "Öppen", "p1.p": "Alla medlemmar ser allas poster och namn. Bra för små team som ändå sitter tillsammans.", "p2.h": "Summerad", "p2.p": "Totaler per aktivitet, utan avsändare. Ni ser vart tiden går — men ingen ser vem som gjort vad.", "p3.h": "Privat", "p3.p": "Var och en ser bara sitt eget. Ägaren kan exportera aggregat för uppföljning.", "p.note": "Ingen kan ändra någon annans tid — inte heller ägaren. Det är en medveten regel, inte en lucka.", "pr.title": "Pris", "pr.lead": "Ägaren betalar för hela gruppen. Ingen medlem möter någonsin en betalvägg.", "pr0.h": "Gratis", "pr0.p": "Upp till 3 personer. Ingen tidsgräns.", "pr1.h": "Team", "pr1.p": "Upp till 10 personer.", "pr2.h": "Större team", "pr2.p": "Upp till 25 personer.", "pr3.h": "Obegränsat", "pr3.p": "Hur många som helst.", "pr.note": "Full historik och CSV-export ingår i alla nivåer. 14 dagars provperiod utan medlemstak — och slutar ni betala raderas ingenting: gruppen pausas, och allt kommer tillbaka vid uppgradering.", "foot.privacy": "Integritetspolicy", "foot.support": "Support"}, "en": {"nav.lang": "English", "hero.eyebrow": "Time tracking for teams · iPhone & Android", "hero.h1": "Time your team <span class=\"em\">actually</span> reports", "hero.sub": "Three taps to fill in a day. One link to invite your colleagues. No admin, no accounts to hand out.", "hero.t1": "Free for up to 3 people", "hero.t2": "Works offline", "hero.t3": "Nobody sees your time unless you want", "badge.soon": "Coming soon to the", "stage.title": "Thursday 6 August", "stage.of": "of 8h · 2h 45m left", "f.title": "Built for low friction", "f.lead": "Time tracking is something you have to do, not something you want to do. Every decision in the app shortens the path from impulse to saved entry.", "f1.h": "Three taps", "f1.p": "Open, pick an activity, save. Fill in afterwards or start a timer — both are first-class paths, neither an afterthought.", "f2.h": "One link invites", "f2.p": "Share the link and your colleague is in. No approval, no invite codes to email around.", "f3.h": "Works offline", "f3.p": "Entries queue locally and sync when you are back online. No time lost on the train or in the basement.", "f4.h": "Widget and timer", "f4.p": "Add 30 or 60 minutes straight from the home screen. A running timer shows on the lock screen and in the Dynamic Island.", "p.title": "Privacy that is built in, not promised", "p.lead": "The group decides how much is shared — and the rules are enforced by the database, not by the interface.", "p1.h": "Open", "p1.p": "Every member sees everyone's entries and names. Good for small teams who sit together anyway.", "p2.h": "Summarised", "p2.p": "Totals per activity, without names. You see where the time goes — but nobody sees who did what.", "p3.h": "Private", "p3.p": "Everyone only sees their own. The owner can export aggregates for follow-up.", "p.note": "Nobody can edit anyone else's time — not even the owner. That is a deliberate rule, not a gap.", "pr.title": "Pricing", "pr.lead": "The owner pays for the whole group. No member ever meets a paywall.", "pr0.h": "Free", "pr0.p": "Up to 3 people. No time limit.", "pr1.h": "Team", "pr1.p": "Up to 10 people.", "pr2.h": "Larger team", "pr2.p": "Up to 25 people.", "pr3.h": "Unlimited", "pr3.p": "As many as you like.", "pr.note": "Full history and CSV export are included in every tier. A 14-day trial with no seat cap — and if you stop paying nothing is deleted: the group pauses, and everything returns on upgrade.", "foot.privacy": "Privacy policy", "foot.support": "Support"}};
-function setLang(lang) {
-  const dict = I18N[lang] || I18N.sv;
-  document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const v = dict[el.getAttribute("data-i18n")];
-    if (v !== undefined) el.textContent = v;
+document.querySelectorAll(".langs a").forEach(function (a) {
+  a.addEventListener("click", function () {
+    try { localStorage.setItem("timetime-lang", a.getAttribute("hreflang")); } catch (e) {}
   });
-  document.querySelectorAll("[data-i18n-html]").forEach(el => {
-    const v = dict[el.getAttribute("data-i18n-html")];
-    if (v !== undefined) el.innerHTML = v;
-  });
-  try { localStorage.setItem("timetime-lang", lang); } catch (e) {}
-}
-let saved = null;
-try { saved = localStorage.getItem("timetime-lang"); } catch (e) {}
-setLang(saved || ((navigator.language || "sv").toLowerCase().startsWith("sv") ? "sv" : "en"));
-document.getElementById("langBtn").addEventListener("click", () => {
-  setLang(document.documentElement.lang === "sv" ? "en" : "sv");
 });
+</script><script>
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem("timetime-lang"); } catch (e) {}
+  var want = saved || (navigator.language || "").slice(0, 2).toLowerCase();
+  if (want === "sv" || want === "de") {
+    location.replace("/" + want + "/" + location.pathname.replace(/^\//, "") + location.hash);
+  }
+})();
 </script>
 </body>
 </html>
