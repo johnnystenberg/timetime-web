@@ -237,7 +237,10 @@ SEK = {"pr0": "0 kr", "pr1": "149 kr", "pr2": "299 kr", "pr3": "499 kr"}
 
 # ---------------------------------------------------------------------------
 
-CSS = "/assets/site.css"
+# Innehållshash i länken: GitHub Pages cachar CSS i tio minuter, och en ny sida
+# med gammal stilmall visade skärmdumparna i full storlek, staplade.
+import hashlib as _hashlib
+CSS = "/assets/site.css?v=" + _hashlib.sha256((ROOT / "assets/site.css").read_bytes()).hexdigest()[:10]
 
 
 def url(lang: str, page: str) -> str:
