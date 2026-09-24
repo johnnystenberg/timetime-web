@@ -432,7 +432,7 @@ def privacy(lang: str) -> str:
 <h2>{t['pv.sees.h']}</h2><p>{s('pv.sees.p')}</p>
 <h2>{t['pv.not.h']}</h2><p>{s('pv.not.p')}</p>
 <h2>{t['pv.sub.h']}</h2><p>{s('pv.sub.p')}</p>
-<h2>{t['pv.rights.h']}</h2><p>{s('pv.rights.p')}</p><p>{s('pv.rights.p2')}</p><p>{s('pv.rights.p3')}</p>
+<h2 id="delete">{t['pv.rights.h']}</h2><p>{s('pv.rights.p')}</p><p>{s('pv.rights.p2')}</p><p>{s('pv.rights.p3')}</p>
 <h2>{t['pv.contact.h']}</h2><p>JMS Software · <a href="mailto:support@timetime.work">support@timetime.work</a></p>"""
     return doc(lang, "privacy", t["pv.title"], body)
 
