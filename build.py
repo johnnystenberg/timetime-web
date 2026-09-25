@@ -57,7 +57,7 @@ T = {
   "pr1.h": "Team", "pr1.p": "Up to 10 people.",
   "pr2.h": "Larger team", "pr2.p": "Up to 25 people.",
   "pr3.h": "Unlimited", "pr3.p": "As many as you like.",
-  "pr.local": "Monthly, in your local currency — shown in the App Store and Google Play.",
+  "pr.local": "Per month; US prices before sales tax. Elsewhere in your local currency — the App Store and Google Play show your price.",
   "pr.note": "Full history and CSV export are included in every tier. A 14-day trial with no seat cap — and if you stop paying nothing is deleted: the group pauses, and everything returns on upgrade.",
   "foot.privacy": "Privacy policy", "foot.support": "Support", "foot.home": "Home", "lang.aria": "Language",
   # Integritetspolicy
@@ -195,7 +195,7 @@ T = {
   "pr1.h": "Team", "pr1.p": "Bis zu 10 Personen.",
   "pr2.h": "Größeres Team", "pr2.p": "Bis zu 25 Personen.",
   "pr3.h": "Unbegrenzt", "pr3.p": "Beliebig viele.",
-  "pr.local": "Monatlich, in deiner Landeswährung — der Preis steht im App Store und bei Google Play.",
+  "pr.local": "Pro Monat, inklusive MwSt. Außerhalb des Euroraums in deiner Landeswährung — der Preis steht im App Store und bei Google Play.",
   "pr.note": "Der vollständige Verlauf und der CSV-Export sind in jeder Stufe enthalten. 14 Tage Testphase ohne Platzlimit — und wenn ihr nicht mehr zahlt, wird nichts gelöscht: Die Gruppe pausiert, und nach einem Upgrade ist alles wieder da.",
   "foot.privacy": "Datenschutz", "foot.support": "Support", "foot.home": "Zur Startseite", "lang.aria": "Sprache",
   "pv.title": "Datenschutzerklärung", "pv.updated": "Zuletzt aktualisiert am 24. September 2026",
@@ -236,7 +236,13 @@ T = {
 
 # Priserna i kronor bara på svenska: beloppen i andra valutor är inte beslutade
 # (brief §11, beslut 13), och kronor för en tysk vore fel valuta.
-SEK = {"pr0": "0 kr", "pr1": "149 kr", "pr2": "299 kr", "pr3": "499 kr"}
+# Priserna per sidans språk (brief §11, "Priserna" 2026-09-25): SEK på svenska,
+# USD på engelska, EUR på tyska — samma jämna nivåer som i butikerna.
+PRICES = {
+    "sv": ({"pr0": "0 kr", "pr1": "149 kr", "pr2": "299 kr", "pr3": "499 kr"}, "/mån"),
+    "en": ({"pr0": "$0", "pr1": "$14.99", "pr2": "$29.99", "pr3": "$49.99"}, "/mo"),
+    "de": ({"pr0": "0 €", "pr1": "14,99 €", "pr2": "29,99 €", "pr3": "49,99 €"}, "/Monat"),
+}
 
 # ---------------------------------------------------------------------------
 
@@ -330,8 +336,8 @@ def footer(lang: str, page: str) -> str:
 
 def index(lang: str) -> str:
     t = T[lang]
-    price = (lambda k: f'<div class="amount">{SEK[k]}' + ("" if k == "pr0" else '<span class="unit">/mån</span>') + "</div>") \
-        if lang == "sv" else (lambda k: "")
+    amounts, unit = PRICES[lang]
+    price = lambda k: f'<div class="amount">{amounts[k]}' + ("" if k == "pr0" else f'<span class="unit">{unit}</span>') + "</div>"
     cards = "".join(
         f'<div class="card"><span class="dot" style="background:{c}"></span><h3>{t[k + ".h"]}</h3><p>{t[k + ".p"]}</p></div>'
         for k, c in [("f1", "#B03A22"), ("f2", "#4E7C7F"), ("f3", "#7A6A9C"), ("f4", "#C9A94A"), ("f5", "#5A6066")]

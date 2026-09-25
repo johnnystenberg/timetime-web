@@ -23,8 +23,9 @@ edit there and run `python3 build.py`. A key missing in one language stops
 the build — that is how the three stay in step. Shared styles are in
 `assets/site.css`.
 
-Prices in SEK appear only on the Swedish page: amounts in other currencies are
-not decided yet, and the English and German pages point to the stores.
+Prices follow the page's language: SEK on the Swedish page, USD on the English
+and EUR on the German — the same round tiers as in the stores (`PRICES` in
+`build.py`). Other currencies are shown by the App Store and Google Play.
 
 The join landing and app services live separately at
 [app.timetime.work](https://app.timetime.work) (Next.js on Vercel) — a static
